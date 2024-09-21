@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13\x66ile_transfer.proto\"\x1f\n\x0b\x46ileRequest\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\"\x1f\n\x0c\x46ileResponse\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\t2;\n\x0c\x46ileTransfer\x12+\n\x0c\x44ownloadFile\x12\x0c.FileRequest\x1a\r.FileResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13\x66ile_transfer.proto\"\x1f\n\x0b\x46ileRequest\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\"\x1f\n\x0c\x46ileResponse\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\x0c\x32\x38\n\x0c\x46ileTransfer\x12(\n\x07GetFile\x12\x0c.FileRequest\x1a\r.FileResponse\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -36,5 +36,5 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_FILERESPONSE']._serialized_start=56
   _globals['_FILERESPONSE']._serialized_end=87
   _globals['_FILETRANSFER']._serialized_start=89
-  _globals['_FILETRANSFER']._serialized_end=148
+  _globals['_FILETRANSFER']._serialized_end=145
 # @@protoc_insertion_point(module_scope)

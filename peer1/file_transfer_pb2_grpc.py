@@ -34,8 +34,8 @@ class FileTransferStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.DownloadFile = channel.unary_unary(
-                '/FileTransfer/DownloadFile',
+        self.GetFile = channel.unary_unary(
+                '/FileTransfer/GetFile',
                 request_serializer=file__transfer__pb2.FileRequest.SerializeToString,
                 response_deserializer=file__transfer__pb2.FileResponse.FromString,
                 _registered_method=True)
@@ -44,7 +44,7 @@ class FileTransferStub(object):
 class FileTransferServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def DownloadFile(self, request, context):
+    def GetFile(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -53,8 +53,8 @@ class FileTransferServicer(object):
 
 def add_FileTransferServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'DownloadFile': grpc.unary_unary_rpc_method_handler(
-                    servicer.DownloadFile,
+            'GetFile': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetFile,
                     request_deserializer=file__transfer__pb2.FileRequest.FromString,
                     response_serializer=file__transfer__pb2.FileResponse.SerializeToString,
             ),
@@ -70,7 +70,7 @@ class FileTransfer(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def DownloadFile(request,
+    def GetFile(request,
             target,
             options=(),
             channel_credentials=None,
@@ -83,7 +83,7 @@ class FileTransfer(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/FileTransfer/DownloadFile',
+            '/FileTransfer/GetFile',
             file__transfer__pb2.FileRequest.SerializeToString,
             file__transfer__pb2.FileResponse.FromString,
             options,

@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 service FileTransfer {
-    rpc DownloadFile (FileRequest) returns (FileResponse);
+    rpc GetFile (FileRequest) returns (FileResponse) {}
 }
 
 message FileRequest {
@@ -9,5 +9,5 @@ message FileRequest {
 }
 
 message FileResponse {
-    string content = 1;
+    bytes content = 1;
 }
