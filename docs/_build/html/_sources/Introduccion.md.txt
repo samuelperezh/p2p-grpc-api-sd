@@ -1,0 +1,4 @@
+# Introducción
+Este proyecto consiste en la implementación de un sistema P2P (Peer-to-Peer) para la compartición de archivos entre nodos (peers) utilizando microservicios, API REST, y gRPC. La arquitectura está diseñada para permitir la comunicación entre múltiples nodos, donde cada nodo actúa como cliente y servidor simultáneamente, permitiendo la consulta y descarga de archivos.
+
+El sistema se despliega utilizando Docker y se basa en microservicios definidos para soportar concurrencia, permitiendo que múltiples procesos remotos se comuniquen con los peers simultáneamente. La comunicación entre nodos se realiza tanto mediante API REST como gRPC, con servicios definidos para la localización de archivos y transferencia simulada de estos (ECO/DUMMY).

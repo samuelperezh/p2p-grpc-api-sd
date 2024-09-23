@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./server
+    container_name: api_rest
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./server:/app
+    networks:
+      - p2p_network
+
+  peer1:
+    build:
+      context: ./peer
+    container_name: peer1
+    environment:
+      - GRPC_PORT=50051
+      - USERNAME=peer1
+      - PASSWORD=12345
+    ports:
+      - "50051:50051"
+    volumes:
+      - ./files_peer1:/peer/files
+    networks:
+      - p2p_network
+    depends_on:
+      - api
+
+  peer2:
+    build:
+      context: ./peer
+    container_name: peer2
+    environment:
+      - GRPC_PORT=50052
+      - USERNAME=peer2
+      - PASSWORD=67890
+    ports:
+      - "50052:50052"
+    volumes:
+      - ./files_peer2:/peer/files
+    networks:
+      - p2p_network
+    depends_on:
+      - api
+
+networks:
+  p2p_network:
+    driver: bridge

@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify
 import sqlite3
 import bcrypt
@@ -7,7 +8,6 @@ from functools import wraps
 
 app = Flask(__name__)
 
-# Initialize the SQLite database
 def init_db():
     conn = sqlite3.connect('DHT.db')
     cursor = conn.cursor()
@@ -18,12 +18,10 @@ def init_db():
     conn.commit()
     conn.close()
 
-# Function to get a database connection
 def get_db_connection():
     conn = sqlite3.connect('DHT.db')
     return conn
 
-# Utility function to validate login details
 def validate_login(username, password):
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -36,23 +34,20 @@ def validate_login(username, password):
         return bcrypt.checkpw(password.encode('utf-8'), hashed_password.encode('utf-8'))
     return False
 
-# Utility function to generate a random string token with 20 characters
 def generate_token():
-    alphabet = string.ascii_letters + string.digits  # Uppercase, lowercase letters and digits
+    alphabet = string.ascii_letters + string.digits
     return ''.join(secrets.choice(alphabet) for _ in range(20))
 
-# Utility function to extract token from the Authorization header
 def extract_token(auth_header):
     if auth_header and auth_header.startswith('Bearer '):
-        return auth_header.split(" ")[1]  # Extract the token part after "Bearer"
+        return auth_header.split(" ")[1]
     return None
 
-# Decorator for checking the token for protected routes
 def check_token(func):
     @wraps(func)
     def decorated_function(*args, **kwargs):
         auth_header = request.headers.get('Authorization')
-        token = extract_token(auth_header)  # Extract the token from the header
+        token = extract_token(auth_header)
         
         if not token:
             return jsonify({'status': 'error', 'message': 'Token missing or malformed'}), 401
@@ -69,7 +64,6 @@ def check_token(func):
         return func(*args, **kwargs)
     return decorated_function
 
-# POST /login endpoint with password hashing
 @app.route('/login', methods=['POST'])
 def login():
     data = request.json
@@ -80,39 +74,32 @@ def login():
     if not username or not password or not url:
         return jsonify({'status': 'error', 'message': 'Missing fields'}), 400
 
-    # Connect to database
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    # Check if the user already exists
     cursor.execute('SELECT password FROM peers WHERE username = ?', (username,))
     result = cursor.fetchone()
 
     if result:
-        # User already exists, check if the password is correct
         if not bcrypt.checkpw(password.encode('utf-8'), result[0].encode('utf-8')):
             conn.close()
             return jsonify({'status': 'error', 'message': 'Incorrect password'}), 401
     else:
-        # New user, hash the password and insert it
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
         cursor.execute('INSERT INTO peers (username, password, url, status) VALUES (?, ?, ?, ?)',
                        (username, hashed_password.decode('utf-8'), url, 'online'))
 
-    # Generate a new random string token (20 characters) every time the user logs in
     new_token = generate_token()
     cursor.execute('UPDATE peers SET token = ?, status = ?, url = ? WHERE username = ?',
                    (new_token, 'online', url, username))
     conn.commit()
 
-    # Log the peer's IP on the server console
     print(f"Peer {username} is online with IP {url}")
     
     conn.close()
     
     return jsonify({'status': 'ok', 'token': new_token})
 
-# POST /indice endpoint - requires password validation and token
 @app.route('/indice', methods=['POST'])
 @check_token
 def indice():
@@ -135,7 +122,6 @@ def indice():
 
     return jsonify({'status': 'ok'})
 
-# POST /buscar endpoint
 @app.route('/buscar', methods=['POST'])
 def buscar():
     data = request.json
@@ -163,7 +149,6 @@ def buscar():
 
     return jsonify({'results': response})
 
-# POST /logout endpoint - requires token
 @app.route('/logout', methods=['POST'])
 @check_token
 def logout():
@@ -183,7 +168,6 @@ def logout():
 
     return jsonify({'status': 'ok'})
 
-# Initialize the database when the app starts
 if __name__ == '__main__':
     init_db()
-    app.run(port=4040, debug=True)
+    app.run(host="0.0.0.0", port=int(os.getenv('PORT', 5000)), debug=True)

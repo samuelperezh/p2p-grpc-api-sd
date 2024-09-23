@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Componentes del Proyecto &#8212; documentación de Proyecto 1 P2P - Sistemas Distribuidos - </title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=def86cc0" />
+    
+    <script src="_static/documentation_options.js?v=e2bb6099"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=d190bf04"></script>
+    
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Descripción de los Microservicios" href="Microservicios.html" />
+    <link rel="prev" title="Arquitectura del Sistema" href="Arquitectura.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="Microservicios.html" title="Descripción de los Microservicios"
+             accesskey="N">siguiente</a> |</li>
+        <li class="right" >
+          <a href="Arquitectura.html" title="Arquitectura del Sistema"
+             accesskey="P">anterior</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">documentación de Proyecto 1 P2P - Sistemas Distribuidos - </a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Componentes del Proyecto</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="componentes-del-proyecto">
+<h1>Componentes del Proyecto<a class="headerlink" href="#componentes-del-proyecto" title="Link to this heading">¶</a></h1>
+<p>Los componentes principales del proyecto están estructurados en varias capas, cada una con responsabilidades específicas.</p>
+<ol class="arabic simple">
+<li><p><strong>peer_client.py:</strong> Implementa la lógica del cliente, permitiendo a los peers enviar solicitudes a otros peers para buscar y descargar archivos.</p></li>
+<li><p><strong>peer_server.py:</strong> Define el servidor gRPC que escucha las solicitudes entrantes de otros peers y responde con información sobre los archivos almacenados en el nodo.</p></li>
+<li><p><strong>file_transfer.proto:</strong> Define el protocolo gRPC utilizado para la comunicación entre peers, especificando los mensajes y servicios.</p></li>
+<li><p><strong>app.py:</strong> Implementa el microservicio de API REST que facilita la localización de archivos en el sistema.</p></li>
+<li><p><strong>docker-compose.yml:</strong> Archivo de configuración para el despliegue de contenedores Docker que define la estructura de red y servicios del sistema P2P【17†source】.</p></li>
+<li><p><strong>Dockerfile:</strong> Define el entorno y las dependencias necesarias para construir y ejecutar los contenedores Docker que albergan los peers.</p></li>
+</ol>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h4>Tema anterior</h4>
+    <p class="topless"><a href="Arquitectura.html"
+                          title="capítulo anterior">Arquitectura del Sistema</a></p>
+  </div>
+  <div>
+    <h4>Próximo tema</h4>
+    <p class="topless"><a href="Microservicios.html"
+                          title="próximo capítulo">Descripción de los Microservicios</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>Esta página</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Componentes.md.txt"
+            rel="nofollow">Mostrar el código</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="Microservicios.html" title="Descripción de los Microservicios"
+             >siguiente</a> |</li>
+        <li class="right" >
+          <a href="Arquitectura.html" title="Arquitectura del Sistema"
+             >anterior</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">documentación de Proyecto 1 P2P - Sistemas Distribuidos - </a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Componentes del Proyecto</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, Samuel Pérez Hurtado.
+      Creado usando <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
+    </div>
+  </body>
+</html>
